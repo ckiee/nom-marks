@@ -1,12 +1,25 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { login, fetchV1Instance, mastodon } from 'masto';
-	let url: string = 'https://social.pixie.town';
+	import debounce from 'lodash.debounce';
+
+	let urlInput: string = 'crimew.gay';
 	let promise: undefined | Promise<mastodon.v1.Instance>;
 
-	function fetch_() {
+	const fetch_ = debounce(() => {
+		let surl;
+		if (/^https?:\/\//.test(urlInput)) surl = urlInput;
+		else surl = `https://${urlInput}`;
+
+		const uurl = new URL(surl);
+		uurl.pathname = '/';
+		uurl.search = '';
+
+		const url = uurl.toString();
 		promise = fetchV1Instance({ url });
-	}
+	}, 80);
+	// 1000/((150wpm*5)/60) = 80ms, not many people are over 150wpm.
+
 	onMount(fetch_);
 </script>
 
@@ -21,8 +34,8 @@
 			type="text"
 			placeholder="https://example.com"
 			id="url"
-			bind:value={url}
-			on:change={fetch_}
+			bind:value={urlInput}
+			on:input={fetch_}
 			class="inline-flex h-7 items-center justify-center border bg-white px-2 text-sm focus:outline-none ring focus:ring-2 ring-violet-400 hover:ring-violet-300 rounded"
 		/>
 	</form>
@@ -35,8 +48,12 @@
 			<img
 				src={info.thumbnail}
 				alt={`${info.title}'s instance thumbnail'`}
-				class="w-max max-h-[15vh] md:max-h-[35vh] self-center rounded"
+				class="w-max max-h-[15vh] md:max-h-[35vh]
+                       self-center p-2 md:p-4 rounded hover-shadow
+                       outline outline-1 outline-slate-400"
 			/>
+
+			<a href="/create-app">that's my instance, let's go!</a>
 		{:catch error}
 			<p class="text-red-500">{error.message}</p>
 		{/await}

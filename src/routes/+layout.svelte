@@ -1,5 +1,5 @@
 <script>
-  import '../app.css';
+	import '../app.scss';
 	import cookie from '$lib/cookie.svg';
 </script>
 
@@ -17,9 +17,9 @@
 		<span>search your mastodon-compatible bookmarks & faves</span>
 		<div
 			class="text-end md:text-start
-                   md:w-fit md:relative md:inset-x-1/2
-                   md:-rotate-6 md:ml-12 md:rounded-md md:drop-shadow-lg
-                   text-base text-emerald-500 whitespace-normal bg-slate-200 p-2"
+             md:w-fit md:relative md:inset-x-1/2
+             md:-rotate-6 md:ml-12 md:rounded-md md:drop-shadow-lg
+             text-base text-emerald-500 whitespace-normal bg-slate-200 p-2"
 		>
 			(now with 100% less server-side action!)
 		</div>
@@ -29,4 +29,4 @@
 <slot />
 
 <!-- TODO impl, also hide if there's an error. need to read from slot whether its ok to show next . next could be a fragment provided by slot! -->
-<div class="mt-4 flex w-full justify-between"><span>&lt;- back</span><span>next -&gt;</span></div>
+<!-- <div class="mt-4 flex w-full justify-between"><span>&lt;- back</span><span>next -&gt;</span></div> -->

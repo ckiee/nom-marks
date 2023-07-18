@@ -1,0 +1,35 @@
+@import '@fontsource-variable/inter';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	/* originally copied from pandoc output, has changed */
+	html {
+		@apply bg-white text-violet-800 text-[20px];
+	}
+	body {
+		@apply m-auto max-w-prose p-4 hyphens-auto break-words;
+	}
+
+	header {
+		@apply mb-16 text-center;
+	}
+
+	hr {
+		@apply border-[3px] border-violet-500 rounded-md;
+	}
+
+	a {
+		@apply underline text-emerald-500 visited:text-violet-500;
+	}
+}
+
+@layer utilities {
+	.debug {
+		@apply border-4 border-red-500 border-dotted;
+	}
+	.hover-shadow {
+		@apply shadow hover:shadow-lg transition-shadow ease-in;
+	}
+}
